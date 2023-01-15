@@ -28,61 +28,65 @@ namespace MusicRenamer
             string path = Directory.GetCurrentDirectory();
             foreach (string filePath in Directory.GetFiles(path, "*", SearchOption.AllDirectories))
             {
-                string fileName = Path.GetFileName(filePath);
-                string pathWithoutName = filePath.Replace(fileName, "");
-                string fileNameRenamed = "";
+                var fileExtension = Path.GetExtension(filePath);
+                if (fileExtension == ".mp3")
+                {
+                    string fileName = Path.GetFileName(filePath);
+                    string pathWithoutName = filePath.Replace(fileName, "");
+                    string fileNameRenamed = "";
 
-                if (regex1.IsMatch(fileName))
-                {
-                    fileNameRenamed = fileName.Substring(0, 2) + " - " + fileName.Substring(3, fileName.Length - 3);
-                }
-                else if (regex2.IsMatch(fileName))
-                {
-                    fileNameRenamed = fileName.Substring(0, 2) + " - " + fileName.Substring(4, fileName.Length - 4);
-                }
-                else if (regex3.IsMatch(fileName))
-                {
-                    fileNameRenamed = fileName.Substring(0, 2) + " - " + fileName.Substring(3, fileName.Length - 3);
-                }
-                else if (regex4.IsMatch(fileName))
-                {
-                    fileNameRenamed = fileName.Substring(0, 2) + " - " + fileName.Substring(4, fileName.Length - 4);
-                }
-                else if (regex5.IsMatch(fileName))
-                {
-                    fileNameRenamed = fileName.Substring(0, 2) + " - " + fileName.Substring(3, fileName.Length - 3);
-                }
-                else if (regex1a.IsMatch(fileName))
-                {
-                    fileNameRenamed = "0" + fileName.Substring(0, 1) + " - " + fileName.Substring(2, fileName.Length - 2);
-                }
-                else if (regex2b.IsMatch(fileName))
-                {
-                    fileNameRenamed = "0" + fileName.Substring(0, 1) + " - " + fileName.Substring(3, fileName.Length - 3);
-                }
-                else if (regex3c.IsMatch(fileName))
-                {
-                    fileNameRenamed = "0" + fileName.Substring(0, 1) + " - " + fileName.Substring(2, fileName.Length - 2);
-                }
-                else if (regex4d.IsMatch(fileName))
-                {
-                    fileNameRenamed = "0" + fileName.Substring(0, 1) + " - " + fileName.Substring(3, fileName.Length - 3);
-                }
-                else if (regex5e.IsMatch(fileName))
-                {
-                    fileNameRenamed = "0" + fileName.Substring(0, 1) + " - " + fileName.Substring(2, fileName.Length - 2);
-                }
-
-                if (!String.IsNullOrEmpty(fileNameRenamed))
-                {
-                    string filePathRenamed = pathWithoutName + fileNameRenamed;
-                    string oldFileNameWithPath = pathWithoutName + fileName;
-                    try
+                    if (regex1.IsMatch(fileName))
                     {
-                        File.Move(oldFileNameWithPath, filePathRenamed);
+                        fileNameRenamed = fileName.Substring(0, 2) + " - " + fileName.Substring(3, fileName.Length - 3);
                     }
-                    catch
+                    else if (regex2.IsMatch(fileName))
                     {
+                        fileNameRenamed = fileName.Substring(0, 2) + " - " + fileName.Substring(4, fileName.Length - 4);
+                    }
+                    else if (regex3.IsMatch(fileName))
+                    {
+                        fileNameRenamed = fileName.Substring(0, 2) + " - " + fileName.Substring(3, fileName.Length - 3);
+                    }
+                    else if (regex4.IsMatch(fileName))
+                    {
+                        fileNameRenamed = fileName.Substring(0, 2) + " - " + fileName.Substring(4, fileName.Length - 4);
+                    }
+                    else if (regex5.IsMatch(fileName))
+                    {
+                        fileNameRenamed = fileName.Substring(0, 2) + " - " + fileName.Substring(3, fileName.Length - 3);
+                    }
+                    else if (regex1a.IsMatch(fileName))
+                    {
+                        fileNameRenamed = "0" + fileName.Substring(0, 1) + " - " + fileName.Substring(2, fileName.Length - 2);
+                    }
+                    else if (regex2b.IsMatch(fileName))
+                    {
+                        fileNameRenamed = "0" + fileName.Substring(0, 1) + " - " + fileName.Substring(3, fileName.Length - 3);
+                    }
+                    else if (regex3c.IsMatch(fileName))
+                    {
+                        fileNameRenamed = "0" + fileName.Substring(0, 1) + " - " + fileName.Substring(2, fileName.Length - 2);
+                    }
+                    else if (regex4d.IsMatch(fileName))
+                    {
+                        fileNameRenamed = "0" + fileName.Substring(0, 1) + " - " + fileName.Substring(3, fileName.Length - 3);
+                    }
+                    else if (regex5e.IsMatch(fileName))
+                    {
+                        fileNameRenamed = "0" + fileName.Substring(0, 1) + " - " + fileName.Substring(2, fileName.Length - 2);
+                    }
+
+                    if (!String.IsNullOrEmpty(fileNameRenamed))
+                    {
+                        string filePathRenamed = pathWithoutName + fileNameRenamed;
+                        string oldFileNameWithPath = pathWithoutName + fileName;
+                        try
+                        {
+                            File.Move(oldFileNameWithPath, filePathRenamed);
+                        }
+                        catch
+                        {
+                        }
                     }
                 }
             }
