@@ -29,6 +29,25 @@ namespace MusicRenamer
             foreach (string filePath in Directory.GetFiles(path, "*", SearchOption.AllDirectories))
             {
                 var fileExtension = Path.GetExtension(filePath);
+
+                if (fileExtension == ".MP3")
+                {
+                    string newFilePath = Path.ChangeExtension(filePath, ".mp3");
+
+                    if (File.Exists(newFilePath))
+                    {
+                        File.Delete(newFilePath);
+                    }
+
+                    File.Move(filePath, newFilePath);
+                }
+            }
+
+            path = Directory.GetCurrentDirectory();
+            foreach (string filePath in Directory.GetFiles(path, "*", SearchOption.AllDirectories))
+            {
+                var fileExtension = Path.GetExtension(filePath);
+
                 if (fileExtension == ".mp3")
                 {
                     string fileName = Path.GetFileName(filePath);
